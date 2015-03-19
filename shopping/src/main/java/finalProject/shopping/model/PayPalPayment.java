@@ -3,13 +3,9 @@ package finalProject.shopping.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "PP_PAYMENT")
-@DiscriminatorValue("1")
 public class PayPalPayment extends Payment {
 
 	@Column(name = "EMAIL")

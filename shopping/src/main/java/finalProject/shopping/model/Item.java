@@ -12,14 +12,14 @@ public class Item {
 	private Product product;
 
 	@Column(name = "QTY")
-	private float quantity;
+	private double quantity;
 
 	protected Item() {
 	}
 
-	public Item(Product product, float quantity) {
+	public Item(Product product, double d) {
 		this.setProduct(product);
-		this.setQuantity(quantity);
+		this.setQuantity(d);
 	}
 
 	public Product getProduct() {
@@ -30,11 +30,11 @@ public class Item {
 		this.product = product;
 	}
 
-	public float getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(float quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 

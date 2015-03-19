@@ -2,13 +2,9 @@ package finalProject.shopping.model;
 
 import java.util.Date;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "CA_PAYMENT")
-@DiscriminatorValue("2")
 public class CashPayment extends Payment {
 
 	protected CashPayment() {

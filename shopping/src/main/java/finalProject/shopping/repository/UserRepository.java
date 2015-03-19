@@ -6,4 +6,6 @@ import finalProject.shopping.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 
+	User findOneByUsername(String username);
+
 }

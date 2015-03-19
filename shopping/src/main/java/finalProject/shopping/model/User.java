@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
+@Table(name = "USER")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,25 +17,39 @@ public class User {
 
 	@Column(name = "FIRST_NAME")
 	private String firstName;
-	
+
 	@Column(name = "LAST_NAME")
 	private String lastName;
-	
+
 	@Column(name = "USERNAME")
 	private String username;
-	
+
 	@Column(name = "PASSWORD")
 	private String password;
 
-	protected User(){}
-	
-	public User(String firstName, String lastName, String username, String password){
+	@Column(name = "ROLE", nullable = false)
+	private String role;
+
+	protected User() {
+	}
+
+	public User(String firstName, String lastName, String username,
+			String password) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setUsername(username);
 		setPassword(password);
+		setRole("USER");
 	}
-	
+
+	private void setRole(String string) {
+		role = string;
+	}
+
+	public void setAdminRole() {
+		setRole("ADMIN");
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -66,5 +80,13 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public Long getId() {
+		return userId;
 	}
 }

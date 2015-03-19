@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,9 +30,24 @@ public class ShoppingCart {
 	@Column(name = "TOTAL")
 	private double total;
 
-	public ShoppingCart() {
+	@ManyToOne
+	@JoinColumn(name="USER_ID")
+	private User user;
+	
+	@OneToOne(mappedBy="shopCart")
+	private Payment payment;
+	
+	protected ShoppingCart() {
+	}
+
+	public ShoppingCart(User user) {
 		listOfItems = new ArrayList<Item>();
 		total = 0;
+		setUser(user);
+	}
+
+	private void setUser(User user) {
+		this.user = user;
 	}
 
 	public void addItem(Item item) {
@@ -38,15 +55,15 @@ public class ShoppingCart {
 		total += item.getQuantity() * item.getProduct().getPrice();
 	}
 
-	public void addItem(Product product, float quantity) {
-		listOfItems.add(new Item(product, quantity));
-		total += quantity * product.getPrice();
+	public void addItem(Product product, double d) {
+		listOfItems.add(new Item(product, d));
+		total += d * product.getPrice();
 	}
 
-	public void removeItem(int productID) {
+	public void removeItem(long l) {
 		int i;
 		for (i = 0; i < listOfItems.size(); i++) {
-			if (listOfItems.get(i).getProduct().getCode() == productID) {
+			if (listOfItems.get(i).getProduct().getCode() == l) {
 				listOfItems.remove(i);
 			}
 		}

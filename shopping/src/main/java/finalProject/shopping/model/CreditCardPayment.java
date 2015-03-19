@@ -3,13 +3,9 @@ package finalProject.shopping.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "CC_PAYMENT")
-@DiscriminatorValue("3")
 public class CreditCardPayment extends Payment {
 	@Column(name = "CLIENT_NAME")
 	private String clientName;
