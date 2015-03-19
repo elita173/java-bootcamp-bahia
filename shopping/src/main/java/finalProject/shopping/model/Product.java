@@ -40,10 +40,11 @@ public class Product {
 	 * The parameter 'isUnit' indicates whether the product is sold in units or
 	 * in parts of a unit (kilograms, liters, etc)
 	 */
-	public Product(String name, double price, boolean isUnit) {
+	public Product(String name, double price, boolean isUnit, Category category) {
 		this.name = name;
 		this.price = price;
 		this.isUnit = isUnit;
+		this.category = category;
 	}
 
 	public void setName(String name) {

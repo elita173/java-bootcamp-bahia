@@ -35,6 +35,8 @@ public interface ShoppingService {
 	public Product findOneProduct(long id);
 
 	public Category findOneCategory(long id);
+	
+	public List<Category> findCategoryByCode(long code);
 
 	public ShoppingCart findOneShoppingCart(long id);
 

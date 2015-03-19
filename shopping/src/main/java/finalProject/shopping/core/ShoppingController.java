@@ -1,5 +1,7 @@
 package finalProject.shopping.core;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +49,7 @@ public class ShoppingController {
 		level1 = new Category("Food", 10, null);
 		level2 = new Category("Canned", 0, level1);
 		level3 = new Category("Tuna&SeaFood", 0, level2);
-		product = new Product("La Campagnola Tuna", 30.5, true);
+		product = new Product("La Campagnola Tuna", 30.5, true, level3);
 		cartService.saveCategory(level1);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
@@ -55,55 +57,55 @@ public class ShoppingController {
 		
 		level2 = new Category("Meat&Poultry", 1, level1);
 		level3 = new Category("Pork", 0, level2);
-		product = new Product("Paladini Ham", 110, false);
+		product = new Product("Paladini Ham", 110, false, level3);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
 		
 		level3 = new Category("Beef", 1, level2);
-		product = new Product("Paty Hamburger x4", 45, true);
+		product = new Product("Paty Hamburger x4", 45, true, level3);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
 		
 		level2 = new Category("Dairy&Cheese", 2, level1);
 		level3 = new Category("Cheese", 0, level2);
-		product = new Product("Cremon Cheese", 98, false);
+		product = new Product("Cremon Cheese", 98, false, level3);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
 		
 		level2 = new Category("Fruit&Vegetables", 3, level1);
 		level3 = new Category("Fruit", 0, level2);
-		product = new Product("Orange", 12, false);
+		product = new Product("Orange", 12, false, level3);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
 		
 		level2 = new Category("Condiments", 4, level1);
 		level3 = new Category("Salt", 0, level2);
-		product = new Product("Celusal Salt 1/2Kg", 14.2, true);
+		product = new Product("Celusal Salt 1/2Kg", 14.2, true, level3);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
 		
 		level2 = new Category("Grain&Pasta", 5, level1);
 		level3 = new Category("Rice", 0, level2);
-		product = new Product("Mocovi Rice 1/2kg", 18.7, true);
+		product = new Product("Mocovi Rice 1/2kg", 18.7, true, level3);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
 		
 		level2 = new Category("Snacks", 6, level1);
 		level3 = new Category("Chips", 0, level2);
-		product = new Product("Pringles Chips x360gr", 32.4, true);
+		product = new Product("Pringles Chips x360gr", 32.4, true, level3);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
 		
-		level1 = new Category("Beverages", 10, null);
+		level1 = new Category("Beverages", 11, null);
 		level2 = new Category("Infusions", 0, level1);
 		level3 = new Category("Yerba", 0, level2);
-		product = new Product("Amanda Yerba", 38.9, true);
+		product = new Product("Amanda Yerba", 38.9, true, level3);
 		cartService.saveCategory(level1);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
@@ -111,14 +113,14 @@ public class ShoppingController {
 		
 		level2 = new Category("No-Alcohol", 1, level1);
 		level3 = new Category("Soft-Drinks", 0, level2);
-		product = new Product("Coca Cola 2.25lt", 29.6, true);
+		product = new Product("Coca Cola 2.25lt", 29.6, true, level3);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
 		
 		level2 = new Category("Alcohol", 2, level1);
 		level3 = new Category("Beer", 0, level2);
-		product = new Product("Heineken Beer 1lt", 28.5, true);
+		product = new Product("Heineken Beer 1lt", 28.5, true, level3);
 		cartService.saveCategory(level2);
 		cartService.saveCategory(level3);
 		cartService.saveProduct(product);
@@ -187,6 +189,23 @@ public class ShoppingController {
 			return new ResponseEntity<String>(product.toString(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>("Product could not be found.",
+					HttpStatus.OK);
+		}
+	}
+	
+	@RequestMapping(value = "/product/cat={categoryId}", method = RequestMethod.GET)
+	public ResponseEntity<String> getStringProductsInCategoryByGET(
+			@PathVariable Long categoryId) {
+		List<Category> categories = cartService.findCategoryByCode(categoryId);
+		List<Product> products = cartService.findProductsFromCategory(categories.get(0));
+		if (products != null) {
+			String result ="Products: <br />";
+			for (Product product : products){
+				result += product.toString() + "<br />";
+			}
+			return new ResponseEntity<String>(result, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("There are not products in this category.",
 					HttpStatus.OK);
 		}
 	}

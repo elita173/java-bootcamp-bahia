@@ -59,7 +59,10 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 
 	public List<Product> findProductsFromCategory(Category category) {
-		return productRepo.findByCategory(category.getSubtreeLowerLimit(3), category.getSubtreeUpperLimit(3));
+		long lowerLimit, upperLimit;
+		lowerLimit = category.getSubtreeLowerLimit(3);
+		upperLimit = category.getSubtreeUpperLimit(3);
+		return productRepo.findByCategory(lowerLimit, upperLimit);
 	}
 
 	public List<Product> findAllProducts() {
@@ -92,5 +95,10 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	public Payment findOnePayment(long id) {
 		return paymentRepo.findOne(id);
+	}
+
+	@Override
+	public List<Category> findCategoryByCode(long code) {
+		return categoryRepo.findByCode(code);
 	}
 }

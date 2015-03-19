@@ -13,6 +13,9 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CAT_ID")
+	private long categoryId;
+	
+	@Column(name = "CODE")
 	private long code;
 
 	@Column(name="CAT_NAME")
@@ -34,7 +37,7 @@ public class Category {
 		this.code = l;
 	}
 
-	private long getCode() {
+	public long getCode() {
 		return code;
 	}
 
