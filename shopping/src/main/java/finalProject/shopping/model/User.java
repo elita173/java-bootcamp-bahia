@@ -86,6 +86,13 @@ public class User {
 		return role;
 	}
 
+	public String toString() {
+		return ("UserID: " + getId() + "<br>First Name: " + getFirstName()
+				+ "<br>Last Name: " + getLastName() + "<br>Username: "
+				+ getUsername() + "<br>Password: " + getPassword()
+				+ "<br>Role: " + getRole());
+	}
+
 	public Long getId() {
 		return userId;
 	}

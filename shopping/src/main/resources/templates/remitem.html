@@ -3,10 +3,10 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>User login</title>
+<title>Remove Item</title>
 </head>
 <body>
-	<form th:action="@{/_remitem}" method="post">
+	<form th:action="@{/cart/_remitem}" method="post">
 		<div>
 			<label> CartId: <input type="number" name="cartId" />
 			</label>

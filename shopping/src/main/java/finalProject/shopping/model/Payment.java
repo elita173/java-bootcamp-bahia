@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public abstract class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	protected int transactionNumber;
+	protected long transactionNumber;
 	
 	@Column(name="DATE")
 	protected Date date;

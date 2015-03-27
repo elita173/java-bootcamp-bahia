@@ -6,9 +6,9 @@
 <title>Choose payment type</title>
 </head>
 <body>
-	<form th:action="@{/showpayment}" method="post" th:unless="${param.cartid == null}">
+	<form th:action="@{/payment/showpayment}" method="post" th:unless="${cartid == null}">
 		<div>
-			<input type="hidden" name="cartid" th:value="${param.cartid[0]}" />
+			<input type="hidden" name="cartid" th:value="${cartid}" />
 		</div>
 		<div>
 			<input type="radio" name="payment" value="cash" checked="true" />Cash
@@ -23,8 +23,8 @@
 			<input type="submit" value="Next" />
 		</div>
 	</form>
-	<div th:if="${param.cartid == null}">
-		You must call with the cartid: /choosepay?cartid=1
+	<div th:if="${cartid == null}">
+		You must call with the cartid, ej: /cart/choosepay/1
 	</div>
 </body>
 </html>

@@ -16,7 +16,7 @@
 	<div>
 		Total $<label th:text="${total}">Text ...</label>
 	</div>
-	<form th:action="@{/addpayment}" method="post">
+	<form th:action="@{/payment/addpayment}" method="post">
 		<div>
 			<input type="hidden" name="cartid" th:value="${cartid}" />
 		</div>
