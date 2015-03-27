@@ -45,7 +45,7 @@ public class Item {
 	public String toString() {
 		String output = "";
 
-		output = output.concat(product.toString() + "\t\t x");
+		output = output.concat(product.toString() + "      x");
 
 		if (product.isUnit()) {
 			output = output.concat(String.format("%.0f", quantity));
@@ -53,7 +53,7 @@ public class Item {
 			output = output.concat(String.format("%.3f", quantity));
 		}
 
-		return (output.concat(String.format(" ... $%.2f \n", product.getPrice()
+		return (output.concat(String.format(" ... $%.2f", product.getPrice()
 				* quantity)));
 	}
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Hello World!</title>
+</head>
+<body>
+	<h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! your order was successfully completed</h2>
+	<div>
+		<table>
+			<tr th:each="item : ${items}">
+				<td th:text="${item}">1</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		Total $<label th:text="${total}">Text ...</label>
+	</div>
+	<div>
+		Total with discount $<label th:text="${discount}">Text ...</label>
+	</div>
+	<form th:action="@{/home}" method="get">
+		<input type="submit" value="Go home" />
+	</form>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" />
+	</form>
+</body>
+</html>

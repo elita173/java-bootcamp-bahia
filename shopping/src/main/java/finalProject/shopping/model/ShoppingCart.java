@@ -31,12 +31,12 @@ public class ShoppingCart {
 	private double total;
 
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name = "USER_ID")
 	private User user;
-	
-	@OneToOne(mappedBy="shopCart")
+
+	@OneToOne(mappedBy = "shopCart")
 	private Payment payment;
-	
+
 	protected ShoppingCart() {
 	}
 
@@ -51,6 +51,12 @@ public class ShoppingCart {
 	}
 
 	public void addItem(Item item) {
+		int i = findProduct(item.getProduct().getCode());
+		if (i >= 0) {
+			Item itemInList = listOfItems.get(i);
+			item.setQuantity(item.getQuantity() + itemInList.getQuantity());
+			listOfItems.remove(i);
+		}
 		listOfItems.add(item);
 		total += item.getQuantity() * item.getProduct().getPrice();
 	}
@@ -61,11 +67,11 @@ public class ShoppingCart {
 	}
 
 	public void removeItem(long l) {
-		int i;
-		for (i = 0; i < listOfItems.size(); i++) {
-			if (listOfItems.get(i).getProduct().getCode() == l) {
-				listOfItems.remove(i);
-			}
+		int i = findProduct(l);
+		if (i >= 0) {
+			Item item = listOfItems.get(i);
+			total -= item.getTotalPrice();
+			listOfItems.remove(i);
 		}
 	}
 
@@ -126,8 +132,38 @@ public class ShoppingCart {
 	public String toString() {
 		String output = "";
 		for (Item actualItem : listOfItems) {
-			output = output.concat(actualItem.toString());
+			output = output.concat(actualItem.toString() + "<br>");
 		}
 		return output;
+	}
+
+	public User getOwner() {
+		return user;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	private int findProduct(long productId) {
+		int i = 0;
+		boolean found = false;
+		while ((i < listOfItems.size()) && (!found)) {
+			found = listOfItems.get(i).getProduct().getCode() == productId;
+			i++;
+		}
+		if (found) {
+			return i - 1;
+		} else {
+			return -1;
+		}
+	}
+
+	public List<Item> getItems() {
+		return listOfItems;
+	}
+
+	public long getId() {
+		return cartId;
 	}
 }

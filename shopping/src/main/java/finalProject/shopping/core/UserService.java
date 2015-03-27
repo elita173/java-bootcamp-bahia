@@ -6,8 +6,6 @@ import finalProject.shopping.model.User;
 
 public interface UserService {
 
-	public User registerUser(UserCreateForm form);
-
 	public User findUserByUsername(String username);
 
 	public List<User> findAllUsers();

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Shopping cart</title>
+</head>
+<body>
+	<h1>Welcome!</h1>
+	<p>You can do the following:</p>
+	<div th:if="${#authentication}">
+		<p style="text-align: center">
+			<a th:href="@{/logout}">Logout</a>
+		</p>
+		<ul>
+			<li>Add an item to your cart <a th:href="@{/additem}">here</a>.
+			</li>
+			<li>Remove an item from your cart <a th:href="@{/remitem}">here</a>.
+			</li>
+		</ul>
+	</div>
+	<div th:unless="${#authentication}">
+		<ul>
+			<li>Login <a th:href="@{/login}">here</a>.
+			</li>
+			<li>Register as a new user <a th:href="@{/register}">here</a>.
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

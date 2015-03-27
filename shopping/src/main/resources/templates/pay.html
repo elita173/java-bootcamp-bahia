@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Payment</title>
+</head>
+<body>
+	<div>
+		<table>
+			<tr th:each="item : ${items}">
+				<td th:text="${item}">1</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		Total $<label th:text="${total}">Text ...</label>
+	</div>
+	<form th:action="@{/addpayment}" method="post">
+		<div>
+			<input type="hidden" name="cartid" th:value="${cartid}" />
+		</div>
+		<div th:if="${payment}=='cash'">
+			<div>
+				<input type="hidden" name="payment" value="cash" />
+			</div>
+		</div>
+		<div th:if="${payment}=='paypal'">
+			<div>
+				<input type="hidden" name="payment" value="paypal" />
+			</div>
+			<div>
+				<label> Client e-mail: <input type="text" name="clientemail" />
+				</label>
+			</div>
+			<div>
+				<label> Password: <input type="password" name="password" />
+				</label>
+			</div>
+		</div>
+		<div th:if="${payment}=='credit'">
+			<div>
+				<input type="hidden" name="payment" value="credit" />
+			</div>
+			<div>
+				<label> Client name: <input type="text" name="clientname" />
+				</label>
+			</div>
+			<div>
+				<label> Credit Card Nº: <input type="text" name="creditcard" />
+				</label>
+			</div>
+		</div>
+		<div>
+			<input type="submit" value="Next" />
+		</div>
+	</form>
+</body>
+</html>

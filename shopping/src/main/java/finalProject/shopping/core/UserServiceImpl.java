@@ -19,13 +19,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User registerUser(UserCreateForm form) {
-		User user = new User(form.getFirstName(), form.getLastName(),
-				form.getUsername(), form.getPassword());
-		return userRepo.saveAndFlush(user);
-	}
-
-	@Override
 	public User findUserByUsername(String username) {
 		return userRepo.findOneByUsername(username);
 	}

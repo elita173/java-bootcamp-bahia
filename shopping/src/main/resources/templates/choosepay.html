@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Choose payment type</title>
+</head>
+<body>
+	<form th:action="@{/showpayment}" method="post" th:unless="${param.cartid == null}">
+		<div>
+			<input type="hidden" name="cartid" th:value="${param.cartid[0]}" />
+		</div>
+		<div>
+			<input type="radio" name="payment" value="cash" checked="true" />Cash
+		</div>
+		<div>
+			<input type="radio" name="payment" value="credit" />Credit card
+		</div>
+		<div>
+			<input type="radio" name="payment" value="paypal" />PayPal
+		</div>
+		<div>
+			<input type="submit" value="Next" />
+		</div>
+	</form>
+	<div th:if="${param.cartid == null}">
+		You must call with the cartid: /choosepay?cartid=1
+	</div>
+</body>
+</html>

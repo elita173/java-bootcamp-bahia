@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>User login</title>
+</head>
+<body>
+	<form th:action="@{/_additem}" method="post">
+		<div>
+			<label> CartId: <input type="number" name="cartId" />
+			</label>
+		</div>
+		<div>
+			<label> ProductId: <input type="number" name="productId" />
+			</label>
+		</div>
+		<div>
+			<label> Quantity: <input type="text" name="qty" />
+			</label>
+		</div>
+		<div>
+			<input type="submit" value="Add Item" />
+		</div>
+	</form>
+</body>
+</html>

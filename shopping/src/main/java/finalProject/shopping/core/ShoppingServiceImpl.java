@@ -53,8 +53,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		shoppingCartRepo.saveAndFlush(cart);
 	}
 
-	public void removeItemFromCart(Item item, ShoppingCart cart) {
-		cart.removeItem(item.getProduct().getCode());
+	public void removeItemFromCart(long productId, ShoppingCart cart) {
+		cart.removeItem(productId);
 		shoppingCartRepo.saveAndFlush(cart);
 	}
 
@@ -97,8 +97,23 @@ public class ShoppingServiceImpl implements ShoppingService {
 		return paymentRepo.findOne(id);
 	}
 
-	@Override
 	public List<Category> findCategoryByCode(long code) {
 		return categoryRepo.findByCode(code);
+	}
+
+	public ShoppingCart findCurrentShoppingCartFromUser(Long userId) {
+		int i = 0;
+		boolean found = false;
+		List<ShoppingCart> carts = shoppingCartRepo
+				.findAllShopingCartsForUser(userId);
+		while (!found && i < carts.size()) {
+			found = carts.get(i).getPayment() == null;
+			i++;
+		}
+		if (found) {
+			return carts.get(i - 1);
+		} else {
+			return null;
+		}
 	}
 }

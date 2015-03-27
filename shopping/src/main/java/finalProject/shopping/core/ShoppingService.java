@@ -20,7 +20,7 @@ public interface ShoppingService {
 
 	public void addItemToCart(Item item, ShoppingCart cart);
 
-	public void removeItemFromCart(Item item, ShoppingCart cart);
+	public void removeItemFromCart(long productId, ShoppingCart cart);
 
 	public List<Product> findProductsFromCategory(Category category);
 
@@ -42,4 +42,5 @@ public interface ShoppingService {
 
 	public Payment findOnePayment(long id);
 
+	public ShoppingCart findCurrentShoppingCartFromUser(Long userId);
 }
